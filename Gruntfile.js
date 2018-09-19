@@ -108,7 +108,7 @@ module.exports = function(grunt) {
     grunt.registerTask("quick-build", ["csslint", "jshint"]);
 
     // Full build without version bump
-    grunt.registerTask("build", ["concat", "qunit", "csslint", "jshint", "uglify"]);
+    grunt.registerTask("build", ["concat", "csslint", "jshint", "qunit", "uglify"]);
 
     // FOR TRAVIS
     // ==========
