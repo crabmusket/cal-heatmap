@@ -200,6 +200,9 @@ var CalHeatMap = function() {
 			filled: "{count} {name} {connector} {date}"
 		},
 
+		// Formatting of the count number of each cell.
+		numberFormat: d3.format(",g"),
+
 		// Formatting of the {date} used in subDomainTitleFormat
 		// @default: null, will use the formatting according to subDomain type
 		// Accept a string used as specifier by d3.time.format()
@@ -1148,6 +1151,7 @@ CalHeatMap.prototype = {
 		options.subDomainDateFormat = (typeof options.subDomainDateFormat === "string" || typeof options.subDomainDateFormat === "function" ? options.subDomainDateFormat : this._domainType[options.subDomain].format.date);
 		options.domainLabelFormat = (typeof options.domainLabelFormat === "string" || typeof options.domainLabelFormat === "function" ? options.domainLabelFormat : this._domainType[options.domain].format.legend);
 		options.subDomainTextFormat = ((typeof options.subDomainTextFormat === "string" && options.subDomainTextFormat !== "") || typeof options.subDomainTextFormat === "function" ? options.subDomainTextFormat : null);
+		options.numberFormat = ((typeof options.numberFormat === "string") ? d3.format(options.numberFormat) : options.numberFormat);
 		options.domainMargin = expandMarginSetting(options.domainMargin);
 		options.legendMargin = expandMarginSetting(options.legendMargin);
 		options.highlight = parent.expandDateSetting(options.highlight);
@@ -1681,7 +1685,7 @@ CalHeatMap.prototype = {
 			}
 
 			return this.formatStringWithObject(this.options.subDomainTitleFormat.filled, {
-				count: this.formatNumber(value),
+				count: (this.options.numberFormat || this.formatNumber)(value),
 				name: this.options.itemName[(value !== 1 ? 1: 0)],
 				connector: this._domainType[this.options.subDomain].format.connector,
 				date: this.formatDate(new Date(d.t), this.options.subDomainDateFormat)
