@@ -1,4 +1,4 @@
-/*! cal-heatmap v3.6.2 (Tue Sep 18 2018 22:43:10)
+/*! cal-heatmap v3.6.2 (Fri Sep 21 2018 06:38:46)
  *  ---------------------------------------------
  *  Cal-Heatmap is a javascript module to create calendar heatmap to visualize time series data
  *  https://github.com/wa0x6e/cal-heatmap
@@ -1693,7 +1693,7 @@ CalHeatMap.prototype = {
 			}
 
 			return this.formatStringWithObject(this.options.subDomainTitleFormat.filled, {
-				count: (this.options.numberFormat || this.formatNumber)(value),
+				count: (this.options.numberFormat || this.formatNumber)(value, d.t),
 				name: this.options.itemName[(value !== 1 ? 1: 0)],
 				connector: this._domainType[this.options.subDomain].format.connector,
 				date: this.formatDate(new Date(d.t), this.options.subDomainDateFormat)
